@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: mywebapi
+  name: mywebapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: mywebapi
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        run: mywebapi
+    spec:
+      containers:
+        - image: mywebapi
+          name: mywebapi
+          resources: {}

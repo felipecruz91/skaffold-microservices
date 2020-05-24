@@ -1,0 +1,17 @@
+apiVersion: skaffold/v2beta3
+kind: Config
+metadata:
+  name: webfrontend
+build:
+  artifacts:
+    - image: webfrontend
+deploy:
+  kubectl:
+    manifests:
+      - manifests/deployment.yaml
+portForward:
+  - resourceType: deployment
+    resourceName: webfrontend
+    namespace: default
+    port: 80
+    localPort: 9001

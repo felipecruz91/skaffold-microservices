@@ -1,0 +1,17 @@
+apiVersion: skaffold/v2beta3
+kind: Config
+metadata:
+  name: mywebapi
+build:
+  artifacts:
+    - image: mywebapi
+deploy:
+  kubectl:
+    manifests:
+      - manifests/deployment.yaml
+portForward:
+  - resourceType: deployment
+    resourceName: mywebapi
+    namespace: default
+    port: 80
+    localPort: 9000

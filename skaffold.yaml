@@ -1,0 +1,26 @@
+apiVersion: skaffold/v2beta3
+kind: Config
+metadata:
+  name: dev-spaces-multiple-microservices
+build:
+  artifacts:
+    - image: mywebapi
+      context: mywebapi
+    - image: webfrontend
+      context: webfrontend
+deploy:
+  kubectl:
+    manifests:
+      - mywebapi/manifests/deployment.yaml
+      - webfrontend/manifests/deployment.yaml
+portForward:
+  - resourceType: deployment
+    resourceName: mywebapi
+    namespace: default
+    port: 80
+    localPort: 9000
+  - resourceType: deployment
+    resourceName: webfrontend
+    namespace: default
+    port: 80
+    localPort: 9001
